@@ -1,6 +1,6 @@
 {
     "$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
-    "name": "marko-run-adapter-demo",
+    "name": "marko-run-cloudflare-demo",
     "compatibility_date": "2025-10-11",
     "main": "src/worker-entry.ts",
     "assets": {
