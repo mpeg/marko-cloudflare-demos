@@ -43,7 +43,9 @@ export default defineConfig({
         }),
         marko({ linked: true }),
         {
-            name: 'disable-public-dir',
+            // this is needed as the cloudflare vite plugin is not expecting the linked build, and its buildApp hook hijacks the entry point on the ssr build if it finds a publicDir
+            // so it's a hack where we disable it on the ssr build, knowing it will still copy the public files in the client build
+            name: 'disable-public-dir-on-ssr-build',
             enforce: 'pre',
             config(config) {
                 if (config.build?.ssr) {
