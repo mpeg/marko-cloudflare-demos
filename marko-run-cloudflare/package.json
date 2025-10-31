@@ -1,5 +1,5 @@
 {
-  "name": "marko-run-adapter-demo",
+  "name": "marko-run-cloudflare",
   "type": "module",
   "private": true,
   "devDependencies": {

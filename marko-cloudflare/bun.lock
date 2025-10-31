@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "@rainproof/web",
+      "name": "marko-cloudflare",
       "devDependencies": {
         "@cloudflare/vite-plugin": "^1.13.18",
         "@marko/vite": "^5.3.3",
