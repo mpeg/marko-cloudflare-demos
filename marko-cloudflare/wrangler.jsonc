@@ -1,0 +1,19 @@
+{
+    "$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
+    "name": "rainproof-demo",
+    "compatibility_date": "2025-10-11",
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
+    "main": "src/sample.ts",
+    "assets": {
+        "directory": "./dist/public",
+        "binding": "ASSETS",
+    },
+    "kv_namespaces": [
+        {
+            "binding": "CACHE",
+            "id": "xx"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "marko-run-adapter-demo",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.2",
+    "@types/bun": "latest",
+    "wrangler": "^4.45.3",
+    "@cloudflare/vite-plugin": "^1.13.17",
+    "@cloudflare/workers-types": "^4.20251014.0",
+    "@marko/run": "^0.9.3",
+    "marko": "^6.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "dev": "marko-run",
+    "build": "marko-run build",
+    "preview": "wrangler dev"
+  }
+}

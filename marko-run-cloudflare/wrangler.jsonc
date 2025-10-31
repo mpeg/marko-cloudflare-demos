@@ -1,0 +1,16 @@
+{
+    "$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
+    "name": "marko-run-adapter-demo",
+    "compatibility_date": "2025-10-11",
+    "main": "src/worker-entry.ts",
+    "assets": {
+        "directory": "./dist/public",
+        "binding": "ASSETS"
+    },
+    "kv_namespaces": [
+        {
+            "binding": "CACHE",
+            "id": "xx"
+        }
+    ]
+}

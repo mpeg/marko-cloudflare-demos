@@ -1,0 +1,14 @@
+<h1>${$global.cached}</h1>
+<form action="/" method="post">
+    <input type="text" name="cached" value=$global.cached>
+    <button type="submit">
+        Submit
+    </button>
+</form>
+
+<let/counter=0>
+<button onClick() {
+    counter++;
+}>
+    ${counter}
+</button>
