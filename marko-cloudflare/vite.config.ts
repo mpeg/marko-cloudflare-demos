@@ -34,6 +34,7 @@ export default defineConfig({
         cloudflare({ viteEnvironment: { name: 'ssr' } }).map(p => {
             return {
                 ...p, apply(config) {
+                    // we only want to apply the cloudflare plugin on the ssr build, otherwise it will break the client build, but apply on dev always
                     if (config.mode === "development") {
                         return true;
                     }
@@ -54,6 +55,7 @@ export default defineConfig({
                 return config;
             },
             async buildApp() {
+                // this should really be a separate plugin, it's a hack to fix the built wrangler.json assets path, as the cloudflare vite plugin doesn't expect the linked build
                 const wrangler = JSON.parse(await readFile('dist/wrangler.json', 'utf-8'));
                 wrangler.assets = { directory: 'public', binding: 'ASSETS' };
                 await writeFile('dist/wrangler.json', JSON.stringify(wrangler));
