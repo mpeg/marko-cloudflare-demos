@@ -19,6 +19,7 @@ export default defineConfig({
     plugins: [
         cloudflare({ viteEnvironment: { name: "ssr" } }),
         marko({
+            // why is this needed? I don't know, but it's needed
             adapter: baseAdapter(),
         }),
     ],
