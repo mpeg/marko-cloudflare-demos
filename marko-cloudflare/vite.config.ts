@@ -77,6 +77,20 @@ export default defineConfig({
                 }
                 
             }
-        }
+        },
+        {
+			// prevent asset references from being included in the SSR manifest
+			// This is necessary because the cloudflare vite plugin will trigger
+			// a fallback client build if it finds any assets in the SSR manifest
+			name: "prevent-ssr-manifest-assets",
+			apply: (config) => Boolean(config.build?.ssr),
+			enforce: "post",
+			renderChunk(_code, chunk, _options) {
+				if (chunk.viteMetadata) {
+					chunk.viteMetadata.importedAssets = new Set();
+				}
+				return null;
+			},
+		},
     ]
 });
