@@ -8,7 +8,7 @@ export default defineConfig({
         ssr: {
             build: {
                 ssr: true,
-                target: "webworker",
+                target: "esnext",
                 outDir: 'dist',
                 rollupOptions: {
                     output: {
@@ -20,12 +20,18 @@ export default defineConfig({
                 dedupe: ['marko'],
                 conditions: ['worker']
             },
+            optimizeDeps: {
+                exclude: ['marko']
+            }
 
         },
         client: {
             build: {
                 emptyOutDir: false,
-                outDir: 'dist/public'
+                outDir: 'dist/public',
+                modulePreload: {
+                    polyfill: false
+                }
             }
         }
     },
@@ -54,12 +60,22 @@ export default defineConfig({
                 }
                 return config;
             },
+        },
+        {
+            name: 'fix-wrangler-assets-path',
+            enforce: 'post',
             async buildApp() {
-                // this should really be a separate plugin, it's a hack to fix the built wrangler.json assets path, as the cloudflare vite plugin doesn't expect the linked build
-                const wrangler = JSON.parse(await readFile('dist/wrangler.json', 'utf-8'));
-                wrangler.assets = { directory: 'public', binding: 'ASSETS' };
-                await writeFile('dist/wrangler.json', JSON.stringify(wrangler));
-                return;
+                // hack to fix the built wrangler.json assets path, as the cloudflare vite plugin doesn't expect the linked build
+                try {
+                    const wrangler = JSON.parse(await readFile('dist/wrangler.json', 'utf-8'));
+                    wrangler.assets = { directory: 'public', binding: 'ASSETS' };
+                    await writeFile('dist/wrangler.json', JSON.stringify(wrangler));
+                    return;
+                }
+                catch {
+                    console.warn('Failed to update wrangler.json assets path');
+                }
+                
             }
         }
     ]
