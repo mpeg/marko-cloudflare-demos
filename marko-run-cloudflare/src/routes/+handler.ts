@@ -13,7 +13,7 @@ export const GET = (async (context, next) => {
     return await next();
 }) satisfies MarkoRun.Handler;
 
-export const POST = (async (context, next) => {
+export const POST = (async (context) => {
     const formData = await context.request.formData();
     const cached = formData.get("cached")?.toString() ?? ""
     await context.platform.env.CACHE.put("test", cached)
